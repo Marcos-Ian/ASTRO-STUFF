@@ -21,7 +21,8 @@ export const moreAstrosCategories = [
         id: 'hd-189733b',
         name: 'HD 189733 b',
         subtitle: 'Hot Jupiter • “Raining Glass”',
-        // tags removed
+        route: '/astros/hd-189733b',
+        modelInstances: [{ key: 'glassJupiter', position: [0, 0, 0], scale: 1 }],
         preview: { type: 'gradient', accent: '#60a5fa' },
         facts: [
           'Violent winds can exceed ~5,000 mph (model-dependent)',
