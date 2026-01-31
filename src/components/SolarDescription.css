@@ -1,0 +1,40 @@
+/* SolarDescription.css - match navbar color scheme and font */
+.sys-description {
+  font-family: "Orbitron", sans-serif;
+  color: #f6e6ff;
+  background: linear-gradient(
+    180deg,
+    rgba(42, 0, 61, 0.06) 0%,
+    rgba(90, 24, 154, 0.06) 50%,
+    rgba(45, 1, 85, 0.06) 100%
+  );
+  border: 1.5px solid rgba(220, 180, 255, 0.2);
+  border-radius: 12px;
+  padding: 18px 22px;
+  box-shadow: 0 8px 24px rgba(120, 50, 200, 0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  max-width: 520px;
+}
+
+.sys-title {
+  margin: 0 0 8px 0;
+  color: #f8eaff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.sys-body {
+  margin: 0 0 6px 0;
+  color: #eae0ff;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.sys-hint {
+  margin: 6px 0 0 0;
+  color: rgba(230, 210, 255, 0.85);
+  font-size: 0.9rem;
+  opacity: 0.95;
+}

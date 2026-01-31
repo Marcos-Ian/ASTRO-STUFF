@@ -1,0 +1,148 @@
+{
+  "planets": [
+    {
+      "name": "Mercury",
+      "size": 8,
+      "texturePath": "/textures/mercury.jpg",
+      "fallbackColor": "#8C7853",
+      "orbitRadius": 0.39,
+      "orbitSpeed": 0.04,
+      "rotationSpeed": 0.004,
+      "axialTilt": 0.034,
+      "description": "The smallest planet in our solar system and closest to the Sun, Mercury is a world of extremes with a heavily cratered surface.",
+      "facts": [
+        "Mercury has the shortest orbital period of any planet, completing a full orbit in just 88 Earth days",
+        "Surface temperatures range from -290°F (-180°C) at night to 800°F (430°C) during the day",
+        "Despite being closest to the Sun, Mercury is not the hottest planet (that's Venus)",
+        "Mercury has no atmosphere to retain heat, causing extreme temperature variations",
+        "A day on Mercury (sunrise to sunrise) lasts 176 Earth days"
+      ]
+    },
+    {
+      "name": "Venus",
+      "size": 15,
+      "texturePath": "/textures/venus.jpg",
+      "fallbackColor": "#FFC649",
+      "orbitRadius": 0.72,
+      "orbitSpeed": 0.015,
+      "rotationSpeed": -0.002,
+      "axialTilt": 177.36,
+      "description": "Often called Earth's twin due to similar size, Venus is the hottest planet with a toxic atmosphere of thick sulfuric acid clouds.",
+      "facts": [
+        "Venus is the hottest planet in our solar system with surface temperatures around 900°F (475°C)",
+        "Venus rotates backwards (retrograde rotation) compared to most other planets",
+        "A day on Venus is longer than its year - it takes 243 Earth days to rotate once",
+        "The atmospheric pressure on Venus is 92 times that of Earth's",
+        "Venus is the brightest natural object in the night sky after the Moon"
+      ]
+    },
+    {
+      "name": "Earth",
+      "size": 16,
+      "texturePath": "/textures/earth.jpg",
+      "fallbackColor": "#4169E1",
+      "orbitRadius": 1,
+      "orbitSpeed": 0.01,
+      "rotationSpeed": 0.02,
+      "axialTilt": 23.44,
+      "description": "Our home planet, the only known world in the universe to harbor life, covered by 71% water and featuring a protective atmosphere.",
+      "facts": [
+        "Earth is the only known planet with liquid water on its surface",
+        "The Earth's core is as hot as the surface of the Sun (around 10,800°F or 6,000°C)",
+        "Earth's atmosphere is composed of 78% nitrogen, 21% oxygen, and 1% other gases",
+        "Our planet is about 4.5 billion years old",
+        "The Moon is slowly moving away from Earth at a rate of about 1.5 inches (3.8 cm) per year"
+      ]
+    },
+    {
+      "name": "Mars",
+      "size": 12,
+      "texturePath": "/textures/mars.jpg",
+      "fallbackColor": "#CD5C5C",
+      "orbitRadius": 1.52,
+      "orbitSpeed": 0.008,
+      "rotationSpeed": 0.018,
+      "axialTilt": 25.19,
+      "description": "The Red Planet, known for its rusty color from iron oxide, features the largest volcano and canyon in the solar system.",
+      "facts": [
+        "Mars has the largest volcano in the solar system - Olympus Mons, which is about 13.6 miles (22 km) high",
+        "The Valles Marineris canyon system is 2,500 miles (4,000 km) long and up to 4 miles (7 km) deep",
+        "Mars has two small moons: Phobos and Deimos, which may be captured asteroids",
+        "Evidence suggests Mars once had liquid water on its surface",
+        "A day on Mars is very similar to Earth, lasting 24 hours and 37 minutes"
+      ]
+    },
+    {
+      "name": "Jupiter",
+      "size": 35,
+      "texturePath": "/textures/jupiter.jpg",
+      "fallbackColor": "#DAA520",
+      "orbitRadius": 5.2,
+      "orbitSpeed": 0.002,
+      "rotationSpeed": 0.04,
+      "axialTilt": 3.13,
+      "description": "The largest planet in our solar system, a gas giant with a massive storm called the Great Red Spot that has raged for hundreds of years.",
+      "facts": [
+        "Jupiter is so large that all the other planets in the solar system could fit inside it",
+        "The Great Red Spot is a storm larger than Earth that has been raging for at least 400 years",
+        "Jupiter has 95 known moons, including the four large Galilean moons: Io, Europa, Ganymede, and Callisto",
+        "Jupiter's strong magnetic field is 20,000 times stronger than Earth's",
+        "Jupiter rotates the fastest of all planets, completing one rotation in just under 10 hours"
+      ]
+    },
+    {
+      "name": "Saturn",
+      "size": 30,
+      "texturePath": "/textures/saturn.jpg",
+      "fallbackColor": "#F4A460",
+      "orbitRadius": 9.5,
+      "orbitSpeed": 0.0009,
+      "rotationSpeed": 0.038,
+      "axialTilt": 26.73,
+      "description": "The ringed planet, famous for its spectacular ring system made of billions of ice and rock particles, is the least dense planet.",
+      "facts": [
+        "Saturn's rings span up to 175,000 miles (282,000 km) but are only about 30 feet (10 meters) thick",
+        "Saturn is the least dense planet - it would float in water if you could find a bathtub big enough",
+        "Saturn has 146 known moons, with Titan being the largest and having a thick atmosphere",
+        "The rings are made up of billions of particles ranging from tiny grains to house-sized chunks",
+        "Saturn's hexagonal storm at its north pole is wider than Earth"
+      ]
+    },
+    {
+      "name": "Uranus",
+      "size": 20,
+      "texturePath": "/textures/uranus.jpg",
+      "fallbackColor": "#4FD0E0",
+      "orbitRadius": 19.2,
+      "orbitSpeed": 0.0004,
+      "rotationSpeed": -0.03,
+      "axialTilt": 97.77,
+      "description": "The ice giant that rotates on its side, Uranus has a blue-green color from methane in its atmosphere and experiences extreme seasons.",
+      "facts": [
+        "Uranus rotates nearly on its side, with an axial tilt of 97.77 degrees",
+        "The planet's blue-green color comes from methane gas in its atmosphere",
+        "Uranus has 27 known moons, all named after characters from Shakespeare and Alexander Pope",
+        "A year on Uranus equals 84 Earth years, with each pole experiencing 42 years of sunlight and 42 years of darkness",
+        "Uranus is the coldest planet with temperatures dropping to -371°F (-224°C)"
+      ]
+    },
+    {
+      "name": "Neptune",
+      "size": 19,
+      "texturePath": "/textures/neptune.jpg",
+      "fallbackColor": "#4166F5",
+      "orbitRadius": 30.1,
+      "orbitSpeed": 0.0001,
+      "rotationSpeed": 0.032,
+      "axialTilt": 28.32,
+      "description": "The windiest planet in our solar system, Neptune is a deep blue ice giant with supersonic winds and mysterious dark storms.",
+      "facts": [
+        "Neptune has the strongest winds in the solar system, reaching speeds of 1,200 mph (2,000 km/h)",
+        "The planet's deep blue color is caused by methane in its atmosphere absorbing red light",
+        "Neptune has 16 known moons, with Triton being the largest and orbiting backwards",
+        "Neptune was the first planet located through mathematical predictions rather than observation",
+        "A year on Neptune equals 165 Earth years, meaning it has completed only one orbit since its discovery in 1846"
+      ]
+    }
+  ]
+}

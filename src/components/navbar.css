@@ -1,0 +1,88 @@
+/* Navbar.css */
+
+.navbar-header {
+  width: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(42, 0, 61, 0.06) 0%,
+    rgba(90, 24, 154, 0.06) 50%,
+    rgba(45, 1, 85, 0.06) 100%
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  border-bottom: 1px solid rgba(220, 180, 255, 0.35);
+  box-shadow: 0 6px 22px rgba(150, 80, 255, 0.18);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 48px;
+  height: 80px;
+
+  font-family: "Orbitron", sans-serif;
+}
+
+/* Container */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Logo */
+.navbar-logo {
+  font-weight: 800;
+  font-size: 2rem;
+  color: #f8eaff;
+  letter-spacing: 2px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+}
+
+/* Links */
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+/* Base link */
+.navbar-link {
+  color: #f6e6ff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+
+  padding: 8px 18px;
+  border-radius: 10px;
+
+  border: 1.5px solid transparent;
+  background: transparent;
+
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+/* Hover glow */
+.navbar-link:hover {
+  background: rgba(200, 140, 255, 0.12);
+  border: 1.5px solid rgba(220, 180, 255, 0.32);
+  box-shadow: 0 0 8px rgba(200, 140, 255, 0.2);
+}
+
+/* Active link */
+.navbar-link.active {
+  color: #ffffff;
+  background: rgba(9, 0, 17, 0.06);
+  border: 1.5px solid rgba(201, 198, 204, 0.45);
+
+}
