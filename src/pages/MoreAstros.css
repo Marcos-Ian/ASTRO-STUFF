@@ -1,0 +1,117 @@
+/* MoreAstros page styles (matches Home theme) */
+
+.more-astros-page {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  padding-top: 96px; /* navbar (80px) + breathing room */
+}
+
+.more-astros-scroll {
+  height: 90%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+}
+
+.more-astros-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 18px 8px 18px;
+}
+
+.more-astros-title {
+  margin: 0;
+  font-family: "Orbitron", sans-serif;
+  color: #f8eaff;
+  letter-spacing: 2px;
+  font-size: 2.1rem;
+  text-shadow: 0 0 18px rgba(200, 140, 255, 0.22);
+}
+
+.more-astros-subtitle {
+  margin: 10px 0 0 0;
+  color: rgba(248, 234, 255, 0.78);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  max-width: 74ch;
+  line-height: 1.4;
+}
+
+.more-astros-toolbar {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.more-astros-search {
+  flex: 1 1 320px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(220, 180, 255, 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(42, 0, 61, 0.35) 0%,
+    rgba(90, 24, 154, 0.22) 55%,
+    rgba(45, 1, 85, 0.35) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+.more-astros-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: rgba(248, 234, 255, 0.92);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  font-size: 1rem;
+}
+
+.more-astros-search input::placeholder {
+  color: rgba(248, 234, 255, 0.55);
+}
+
+.more-astros-kpi {
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 1px;
+  font-size: 0.86rem;
+  color: rgba(248, 234, 255, 0.72);
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(220, 180, 255, 0.18);
+  background: rgba(9, 0, 17, 0.28);
+}
+
+/* subtle space backdrop */
+.more-astros-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 18%, rgba(192, 132, 252, 0.08), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(96, 165, 250, 0.06), transparent 60%),
+    radial-gradient(circle at 50% 95%, rgba(168, 85, 247, 0.06), transparent 55%);
+  pointer-events: none;
+}
+
+.more-astros-scroll {
+  position: relative;
+}
+
+.more-astros-empty {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px;
+  color: rgba(248, 234, 255, 0.7);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}

@@ -18,7 +18,7 @@ const Navbar = () => {
       {/* Logo + Links */}
       <div className="navbar-left">
         <NavLink to="/" style={{ textDecoration: "none" }}>
-          <span className="navbar-logo">Astronomy</span>
+          <span className="navbar-logo">AstroStuff</span>
         </NavLink>
 
         <nav className="navbar-links">
