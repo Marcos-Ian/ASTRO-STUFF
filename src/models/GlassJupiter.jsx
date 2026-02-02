@@ -18,12 +18,11 @@ export default function GlassJupiter({ position = [0, 0, 0], scale = 1 }) {
     <group position={position} scale={scale}>
       {/* Planet body */}
       <mesh ref={meshRef} castShadow receiveShadow>
-        <sphereGeometry args={[1, 64, 64]} />
+        <sphereGeometry args={[38, 64, 64]} />
         <MeshWobbleMaterial
           color="#3b82f6"
           factor={0.2}
           speed={1}
-          transparent
           opacity={0.85}
           envMapIntensity={1.2}
           clearcoat={1}
