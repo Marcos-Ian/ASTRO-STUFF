@@ -1,5 +1,9 @@
 import planetsData from '../data/planets.json';
-import { AsteroidBelt, Moon, Planet, SaturnRings, Sun } from './solarSystem';
+import { AsteroidBelt } from './solarSystem/AsteroidBelt';
+import { Moon } from './solarSystem/Moon';
+import { Planet } from './solarSystem/Planet';
+import { SaturnRings } from './solarSystem/SaturnRings';
+import { Sun } from './solarSystem/Sun';
 
 /* =======================
    Solar System
