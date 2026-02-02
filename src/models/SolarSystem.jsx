@@ -88,3 +88,5 @@ export function SolarSystem({ onPlanetClick, selectedPlanet, onPlanetRef, rotati
 }
 
 export default SolarSystem;
+
+export { AsteroidBelt, Moon, Planet, SaturnRings, Sun };
