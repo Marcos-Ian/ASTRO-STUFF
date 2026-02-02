@@ -1,9 +1,22 @@
 .astro-detail {
   min-height: 100vh;
+  width: 100%;
+  position: relative;
   color: #f8fafc;
-  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.15), transparent 55%),
-    #02030a;
+  background: #000;
+  overflow: hidden;
   padding: 120px 8vw 64px;
+}
+
+.canvas-full {
+  width: 100%;
+  height: 100%;
+}
+
+.astro-detail__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 .astro-detail__shell {
@@ -12,6 +25,8 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  position: relative;
+  z-index: 1;
 }
 
 .astro-detail__header {
@@ -50,30 +65,23 @@
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
 }
 
-.astro-detail__panel {
-  border-radius: 24px;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  padding: 20px;
+.astro-detail__spacer {
   min-height: 460px;
-}
-
-.astro-detail__model {
-  height: 420px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #05070f;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  display: flex;
+  align-items: flex-end;
 }
 
 .astro-detail__model-empty {
-  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: #94a3b8;
   padding: 24px;
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .astro-detail__facts {

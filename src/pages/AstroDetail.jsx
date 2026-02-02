@@ -1,11 +1,12 @@
 import { Suspense, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Stars } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import Loader from '../components/Loader'
 import { moreAstrosCategories, flattenAstros } from '../data/moreAstrosData'
 import { modelRegistry } from '../models'
+import StarSphere from '../models/StarSphere'
 import './AstroDetail.css'
 
 const AstroDetail = () => {
@@ -56,6 +57,32 @@ const AstroDetail = () => {
 
   return (
     <section className="astro-detail">
+      <Canvas
+        className="canvas-full astro-detail__canvas"
+        camera={{ position: [0, 300, 800], fov: 75, near: 0.1, far: 10000 }}
+        gl={{
+          alpha: false,
+          antialias: true,
+          outputColorSpace: THREE.SRGBColorSpace,
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.15,
+        }}
+      >
+        <color attach="background" args={['#000000']} />
+        <Suspense fallback={<Loader />}>
+          <ambientLight intensity={0.17} />
+          <hemisphereLight intensity={0.8} color="#bcd7ff" groundColor="#080808" />
+          <StarSphere />
+          {models}
+          <OrbitControls
+            enableZoom
+            enablePan
+            enableRotate
+            minDistance={100}
+            maxDistance={2000}
+          />
+        </Suspense>
+      </Canvas>
       <div className="astro-detail__shell">
         <header className="astro-detail__header">
           <button type="button" className="astro-detail__back" onClick={() => navigate(-1)}>
@@ -69,32 +96,12 @@ const AstroDetail = () => {
         </header>
 
         <div className="astro-detail__content">
-          <div className="astro-detail__panel">
-            <div className="astro-detail__model">
-              {models.length ? (
-                <Canvas
-                  camera={{ position: [0, 0, 5], fov: 50 }}
-                  gl={{
-                    alpha: false,
-                    antialias: true,
-                    outputColorSpace: THREE.SRGBColorSpace,
-                  }}
-                >
-                  <color attach="background" args={['#05070f']} />
-                  <Suspense fallback={<Loader />}>
-                    <ambientLight intensity={0.35} />
-                    <pointLight position={[5, 5, 5]} intensity={1} />
-                    <Stars radius={100} depth={50} count={4000} factor={4} saturation={0} fade />
-                    {models}
-                    <OrbitControls enablePan={false} />
-                  </Suspense>
-                </Canvas>
-              ) : (
-                <div className="astro-detail__model-empty">
-                  3D model coming soon. Add a modelKey or modelInstances to wire one up.
-                </div>
-              )}
-            </div>
+          <div className="astro-detail__spacer">
+            {!models.length ? (
+              <div className="astro-detail__model-empty">
+                3D model coming soon. Add a modelKey or modelInstances to wire one up.
+              </div>
+            ) : null}
           </div>
 
           <aside className="astro-detail__facts">
