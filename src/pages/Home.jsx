@@ -9,6 +9,7 @@ import StarSphere from '../models/StarSphere'
 import * as THREE from 'three'
 import CameraController from '../components/CameraController'
 import SolarDescription from '../components/SolarDescription'
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const Home = () => {
   const [selectedPlanet, setSelectedPlanet] = useState(null);
@@ -105,6 +106,13 @@ const Home = () => {
             minDistance={100}
             maxDistance={2000}
           />
+           <EffectComposer>
+        <Bloom
+          intensity={2.5}
+          luminanceThreshold={0.15}
+          luminanceSmoothing={0.9}
+        />
+      </EffectComposer>
         </Suspense>
       </Canvas>
       {/* Small right-side description */}

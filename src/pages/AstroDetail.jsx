@@ -8,6 +8,7 @@ import StarSphere from '../models/StarSphere';
 import { modelRegistry } from '../models';
 import { moreAstrosCategories } from '../data/moreAstrosData';
 import * as THREE from 'three';
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const AstroDetail = () => {
   const { id } = useParams();
@@ -80,6 +81,10 @@ const AstroDetail = () => {
           {astroData?.modelInstances?.map((instance, idx) => {
             const ModelComponent = modelRegistry[instance.key];
             if (!ModelComponent) return null;
+            // Pass rotationSpeed as speedMultiplier for GlassJupiter
+            if (instance.key === 'glassJupiter') {
+              return <ModelComponent key={idx} {...instance} speedMultiplier={rotationSpeed} />;
+            }
             return <ModelComponent key={idx} {...instance} />;
           })}
           
@@ -90,6 +95,13 @@ const AstroDetail = () => {
             minDistance={100}
             maxDistance={2000}
           />
+            <EffectComposer>
+                  <Bloom
+                    intensity={2.5}
+                    luminanceThreshold={0.15}
+                    luminanceSmoothing={0.9}
+                  />
+                </EffectComposer>
         </Suspense>
       </Canvas>
     </section>
