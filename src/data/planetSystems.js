@@ -24,10 +24,10 @@ export const glassJupiterSystem = {
       id: 'hd-189733-b',
       radius: PLANET_RADIUS,
       texture: '/textures/HD189733b.png',
-      rotationSpeed: 0.04,
+      rotationSpeed: 1.2,
       orbit: {
         radius: STAR_RADIUS * ORBIT_IN_STAR_RADII * DISTANCE_SCALE,
-        speed: 0.08,
+        speed: 1.2,
       },
       material: {
         type: 'wobble',
