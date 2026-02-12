@@ -5,6 +5,8 @@ export const glassJupiterSystem = {
     {
       id: 'hd-189733-a',
       name: 'HD 189733 A',
+      type: 'K-type Star',
+      facts: ['Host star of the hot Jupiter HD 189733 b.'],
       radius: 78.8,
       color: '#ffb347',
       texture: '/textures/sun.jpg',
@@ -60,6 +62,8 @@ export const trappistSystem = {
     {
       id: 'trappist-1-a',
       name: 'TRAPPIST-1',
+      type: 'Red Dwarf',
+      facts: ['Ultra-cool red dwarf hosting a compact system of Earth-sized planets.'],
       radius: 18,
       color: '#ffb090',
       texture: '/textures/sun.jpg',
@@ -121,6 +125,8 @@ export const keplerBinarySystem = {
     {
       id: 'kepler-47-a',
       name: 'Kepler-47 A',
+      type: 'Sun-like Star',
+      facts: ['Primary star in a close binary that hosts circumbinary planets.'],
       radius: 28,
       color: '#ffd9a0',
       texture: '/textures/sun.jpg',
@@ -132,6 +138,8 @@ export const keplerBinarySystem = {
     {
       id: 'kepler-47-b',
       name: 'Kepler-47 B',
+      type: 'Companion Star',
+      facts: ['Smaller companion in the Kepler-47 binary system.'],
       radius: 20,
       color: '#ffe6b3',
       texture: '/textures/sun.jpg',
@@ -178,6 +186,8 @@ export const proximaCentauriSystem = {
     {
       id: 'proxima-centauri',
       name: 'Proxima Centauri',
+      type: 'Red Dwarf',
+      facts: ['Closest star to the Sun and a flare-active red dwarf.'],
       radius: 10,
       color: '#ff6b5a',
       texture: '/textures/sun.jpg',
@@ -196,6 +206,8 @@ export const proximaCentauriSystem = {
     {
       id: 'alpha-centauri-a',
       name: 'Alpha Centauri A',
+      type: 'Sun-like Star',
+      facts: ['Brighter, sun-like primary in the Alpha Centauri binary.'],
       radius: 80,
       color: '#ffe0b8',
       texture: '/textures/sun.jpg',
@@ -214,6 +226,8 @@ export const proximaCentauriSystem = {
     {
       id: 'alpha-centauri-b',
       name: 'Alpha Centauri B',
+      type: 'K-type Star',
+      facts: ['Slightly cooler and smaller companion to Alpha Centauri A.'],
       radius: 60,
       color: '#ffd2a8',
       texture: '/textures/sun.jpg',
@@ -305,6 +319,8 @@ export const kepler10System = {
     {
       id: 'kepler-10-a',
       name: 'Kepler-10',
+      type: 'Sun-like Star',
+      facts: ['Host star of some of the earliest confirmed rocky exoplanets.'],
       radius: 55,
       color: '#ffd5a6',
       texture: '/textures/sun.jpg',

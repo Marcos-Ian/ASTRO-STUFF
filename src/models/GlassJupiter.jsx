@@ -8,6 +8,7 @@ export default function GlassJupiter({
   speedMultiplier = 1,
   onPlanetClick,
   onPlanetRef,
+  onStarClick,
 }) {
   return (
     <group position={position} scale={scale}>
@@ -18,6 +19,7 @@ export default function GlassJupiter({
           if (onPlanetClick) onPlanetClick(planet, glassJupiterSystem);
         }}
         onPlanetRef={onPlanetRef}
+        onStarClick={onStarClick}
       />
     </group>
   );

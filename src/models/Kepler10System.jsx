@@ -8,6 +8,7 @@ export default function Kepler10System({
   speedMultiplier = 1,
   onPlanetClick,
   onPlanetRef,
+  onStarClick,
 }) {
   return (
     <group position={position} scale={scale}>
@@ -18,6 +19,7 @@ export default function Kepler10System({
           if (onPlanetClick) onPlanetClick(planet, kepler10System);
         }}
         onPlanetRef={onPlanetRef}
+        onStarClick={onStarClick}
       />
     </group>
   );

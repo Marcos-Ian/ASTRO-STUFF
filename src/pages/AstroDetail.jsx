@@ -13,6 +13,7 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import PlanetSystemInfo from '../components/PlanetSystemInfo';
 import CameraController from '../components/CameraController';
 import SolarDescription from '../components/SolarDescription';
+import StarInfo from '../components/StarInfo';
 
 const systemByModelKey = {
   glassJupiter: glassJupiterSystem,
@@ -52,6 +53,8 @@ const AstroDetail = () => {
   const [selectedPlanet, setSelectedPlanet] = useState(null);
   const [selectedSystemName, setSelectedSystemName] = useState(null);
   const [selectedPlanetId, setSelectedPlanetId] = useState(null);
+  const [selectedStar, setSelectedStar] = useState(null);
+  const [selectedStarSystemName, setSelectedStarSystemName] = useState(null);
   const planetRefs = useRef({});
   const controlsRef = useRef(null);
 
@@ -86,12 +89,24 @@ const AstroDetail = () => {
     setSelectedPlanet(planet ?? null);
     setSelectedSystemName(system?.name ?? null);
     setSelectedPlanetId(planet?.id ?? null);
+    setSelectedStar(null);
+    setSelectedStarSystemName(null);
+  };
+
+  const handleStarClick = (star, system) => {
+    setSelectedStar(star ?? null);
+    setSelectedStarSystemName(system?.name ?? null);
+    setSelectedPlanet(null);
+    setSelectedSystemName(null);
+    setSelectedPlanetId(null);
   };
 
   const handleResetSelection = () => {
     setSelectedPlanet(null);
     setSelectedSystemName(null);
     setSelectedPlanetId(null);
+    setSelectedStar(null);
+    setSelectedStarSystemName(null);
   };
 
   return (
@@ -162,6 +177,7 @@ const AstroDetail = () => {
                   {...instance}
                   speedMultiplier={rotationSpeed}
                   onPlanetClick={handlePlanetClick}
+                  onStarClick={handleStarClick}
                   onPlanetRef={(name, ref) => {
                     if (ref) {
                       planetRefs.current[name] = ref;
@@ -215,6 +231,16 @@ const AstroDetail = () => {
             setSelectedPlanet(null);
             setSelectedSystemName(null);
             setSelectedPlanetId(null);
+          }}
+        />
+      )}
+      {selectedStar && (
+        <StarInfo
+          star={selectedStar}
+          systemName={selectedStarSystemName}
+          onClose={() => {
+            setSelectedStar(null);
+            setSelectedStarSystemName(null);
           }}
         />
       )}

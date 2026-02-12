@@ -8,6 +8,7 @@ export default function ProximaCentauriSystem({
   speedMultiplier = 1,
   onPlanetClick,
   onPlanetRef,
+  onStarClick,
 }) {
   const { stars = [], planets = [] } = proximaCentauriSystem;
 
@@ -25,6 +26,10 @@ export default function ProximaCentauriSystem({
     if (onPlanetClick) onPlanetClick(planet, proximaCentauriSystem);
   };
 
+  const handleStarClick = (star) => {
+    if (onStarClick) onStarClick(star, proximaCentauriSystem);
+  };
+
   const renderStar = (star) => (
     <Star
       name={star.name}
@@ -37,6 +42,8 @@ export default function ProximaCentauriSystem({
       rotationSpeed={star.rotationSpeed}
       speedMultiplier={speedMultiplier}
       glow={star.glow}
+      onClick={onStarClick ? handleStarClick : null}
+      starData={star}
     />
   );
 

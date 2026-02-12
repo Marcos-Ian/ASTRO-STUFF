@@ -14,6 +14,8 @@ export function Star({
   rotationSpeed = 0,
   speedMultiplier = 1,
   glow,
+  onClick,
+  starData,
 }) {
   const starRef = useRef();
   const starTexture = useTexture(texture || '/textures/sun.jpg');
@@ -32,7 +34,24 @@ export function Star({
   return (
     <group>
       <pointLight intensity={intensity} decay={decay} distance={distance} color={color} />
-      <mesh ref={starRef}>
+      <mesh
+        ref={starRef}
+        onClick={(e) => {
+          if (!onClick) return;
+          e.stopPropagation();
+          onClick(starData);
+        }}
+        onPointerOver={(e) => {
+          if (!onClick) return;
+          e.stopPropagation();
+          document.body.style.cursor = 'pointer';
+        }}
+        onPointerOut={(e) => {
+          if (!onClick) return;
+          e.stopPropagation();
+          document.body.style.cursor = 'default';
+        }}
+      >
         <sphereGeometry args={[radius, 64, 64]} />
         <meshBasicMaterial map={starTexture} color={color} toneMapped />
       </mesh>

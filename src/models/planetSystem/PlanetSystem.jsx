@@ -10,8 +10,13 @@ export function PlanetSystem({
   speedMultiplier = 1,
   onPlanetClick,
   onPlanetRef,
+  onStarClick,
 }) {
   if (!system) return null;
+
+  const handleStarClick = (starData) => {
+    if (onStarClick) onStarClick(starData, system);
+  };
 
   return (
     <group position={position} scale={scale}>
@@ -28,6 +33,8 @@ export function PlanetSystem({
             rotationSpeed={star.rotationSpeed}
             speedMultiplier={speedMultiplier}
             glow={star.glow}
+            onClick={onStarClick ? handleStarClick : null}
+            starData={star}
           />
         );
 
