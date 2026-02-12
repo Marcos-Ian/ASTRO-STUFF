@@ -46,6 +46,8 @@ export const moreAstrosCategories = [
         id: 'kepler-10b',
         name: 'Kepler-10 b',
         subtitle: 'Scorched Rock • Super-Earth',
+        route: '/astros/kepler-10b',
+        modelInstances: [{ key: 'kepler10System', position: [0, 0, 0], scale: 1 }],
         // tags removed
         preview: { type: 'gradient', accent: '#a78bfa' },
         facts: [
@@ -102,6 +104,8 @@ export const moreAstrosCategories = [
         id: 'proxima-centauri',
         name: 'Proxima Centauri',
         subtitle: 'Nearest Star • Proxima b',
+        route: '/astros/proxima-centauri',
+        modelInstances: [{ key: 'proximaCentauri', position: [0, 0, 0], scale: 1 }],
         // tags removed
         preview: { type: 'gradient', accent: '#ef4444' },
         facts: [

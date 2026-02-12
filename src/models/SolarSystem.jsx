@@ -9,15 +9,10 @@ import { Sun } from './solarSystem/Sun';
    Solar System
 ======================= */
 export function SolarSystem({ onPlanetClick, selectedPlanet, onPlanetRef, rotationSpeed = 1, ...props }) {
-  const AU_TO_UNITS = 220;
   // Less compression so Mars → Belt gap is clearer
-  const compressDistance = (au) => Math.pow(au, 0.80) * AU_TO_UNITS + 30;
 
   // Transform the planet data from JSON, applying the compressed orbit radius
-  const planets = planetsData.planets.map((planet) => ({
-    ...planet,
-    orbitRadius: compressDistance(planet.orbitRadius)
-  }));
+  const planets = planetsData.planets;
 
   return (
     <group {...props}>
@@ -25,8 +20,8 @@ export function SolarSystem({ onPlanetClick, selectedPlanet, onPlanetRef, rotati
 
       {/* Asteroid Belt: between Mars and Jupiter (main belt) */}
       <AsteroidBelt
-        innerRadius={compressDistance(2.2)}
-        outerRadius={compressDistance(3.2)}
+        innerRadius={443.391}
+        outerRadius={587.882}
         beltWidth={40}
         count={700}
         minSize={1.2}

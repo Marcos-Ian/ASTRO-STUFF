@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
-import { MeshWobbleMaterial, useTexture } from '@react-three/drei';
+import { Html, MeshWobbleMaterial, useTexture } from '@react-three/drei';
 import { useSpin } from './useSpin';
 import { Orbit } from './Orbit';
 
@@ -18,8 +18,13 @@ export function Planet({
   atmosphere,
   glow,
   moons,
+  onClick,
+  planetData,
+  onPlanetRef,
+  planetId,
 }) {
   const planetRef = useRef();
+  const planetGroupRef = useRef();
   const planetTexture = useTexture(texture || '/textures/earth.jpg');
 
   useEffect(() => {
@@ -34,6 +39,15 @@ export function Planet({
   }, [planetTexture]);
 
   useSpin(planetRef, { speed: rotationSpeed, speedMultiplier });
+
+  useEffect(() => {
+    if (onPlanetRef && planetId) {
+      onPlanetRef(planetId, planetGroupRef.current);
+    }
+    return () => {
+      if (onPlanetRef && planetId) onPlanetRef(planetId, null);
+    };
+  }, [onPlanetRef, planetId]);
 
   const ringTexture = useTexture(rings?.texture || '/textures/saturn_rings.png');
   useEffect(() => {
@@ -51,8 +65,26 @@ export function Planet({
   }, [rings]);
 
   return (
-    <group rotation={[THREE.MathUtils.degToRad(axialTilt), 0, 0]}>
-      <mesh ref={planetRef} castShadow receiveShadow>
+    <group ref={planetGroupRef} rotation={[THREE.MathUtils.degToRad(axialTilt), 0, 0]}>
+      <mesh
+        ref={planetRef}
+        castShadow
+        receiveShadow
+        onClick={(e) => {
+          e.stopPropagation();
+          if (onClick) onClick(planetData);
+        }}
+        onPointerOver={(e) => {
+          if (!onClick) return;
+          e.stopPropagation();
+          document.body.style.cursor = 'pointer';
+        }}
+        onPointerOut={(e) => {
+          if (!onClick) return;
+          e.stopPropagation();
+          document.body.style.cursor = 'default';
+        }}
+      >
         <sphereGeometry args={[radius, DEFAULT_SEGMENTS, DEFAULT_SEGMENTS]} />
         {material?.type === 'wobble' ? (
           <MeshWobbleMaterial
@@ -74,6 +106,34 @@ export function Planet({
           />
         )}
       </mesh>
+
+      {planetData?.name && (
+        <Html
+          position={[0, -(radius + 10), 0]}
+          center
+          distanceFactor={30}
+          occlude
+          style={{
+            pointerEvents: 'none',
+            userSelect: 'none',
+            zIndex: -1,
+          }}
+        >
+          <div
+            style={{
+              color: 'white',
+              padding: '4px 12px',
+              borderRadius: '6px',
+              fontSize: '400px',
+              fontWeight: 700,
+              whiteSpace: 'nowrap',
+              fontFamily: 'Orbitron, sans-serif',
+            }}
+          >
+            {planetData.name}
+          </div>
+        </Html>
+      )}
 
       {atmosphere && (
         <mesh>
@@ -116,8 +176,15 @@ export function Planet({
             <Orbit
               key={moon.id}
               radius={moon.orbit?.radius ?? 0}
+              semiMajorAxis={moon.orbit?.semiMajorAxis}
+              eccentricity={moon.orbit?.eccentricity}
               speed={moon.orbit?.speed ?? 0}
+              period={moon.orbit?.period}
+              phase={moon.orbit?.phase}
               inclination={moon.orbit?.inclination ?? 0}
+              argumentOfPeriapsis={moon.orbit?.argumentOfPeriapsis}
+              longitudeOfAscendingNode={moon.orbit?.longitudeOfAscendingNode}
+              flatten
               speedMultiplier={speedMultiplier}
             >
               <Planet
@@ -132,6 +199,8 @@ export function Planet({
                 atmosphere={moon.atmosphere}
                 glow={moon.glow}
                 moons={moon.moons}
+                onClick={onClick}
+                planetData={moon}
               />
             </Orbit>
           ))

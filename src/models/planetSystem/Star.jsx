@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { useTexture } from '@react-three/drei';
+import { Html, useTexture } from '@react-three/drei';
 import { useSpin } from './useSpin';
 
 export function Star({
+  name,
   radius,
   color = '#ffffff',
   texture,
@@ -35,6 +36,33 @@ export function Star({
         <sphereGeometry args={[radius, 64, 64]} />
         <meshBasicMaterial map={starTexture} color={color} toneMapped />
       </mesh>
+      {name && (
+        <Html
+          position={[0, -(radius + 10), 0]}
+          center
+          distanceFactor={30}
+          occlude
+          style={{
+            pointerEvents: 'none',
+            userSelect: 'none',
+            zIndex: -1,
+          }}
+        >
+          <div
+            style={{
+              color: 'white',
+              padding: '4px 12px',
+              borderRadius: '6px',
+              fontSize: '400px',
+              fontWeight: 700,
+              whiteSpace: 'nowrap',
+              fontFamily: 'Orbitron, sans-serif',
+            }}
+          >
+            {name}
+          </div>
+        </Html>
+      )}
       {glow && (
         <mesh>
           <sphereGeometry args={[radius * (glow.scale ?? 1.03), 64, 64]} />

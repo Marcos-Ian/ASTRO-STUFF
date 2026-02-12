@@ -1,4 +1,4 @@
-import { Suspense, useState, useMemo } from 'react';
+import { Suspense, useState, useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -7,12 +7,53 @@ import Loader from '../components/Loader';
 import StarSphere from '../models/StarSphere';
 import { modelRegistry } from '../models';
 import { moreAstrosCategories } from '../data/moreAstrosData';
+import { glassJupiterSystem, kepler10System, proximaCentauriSystem } from '../data/planetSystems';
 import * as THREE from 'three';
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import PlanetSystemInfo from '../components/PlanetSystemInfo';
+import CameraController from '../components/CameraController';
+import SolarDescription from '../components/SolarDescription';
+
+const systemByModelKey = {
+  glassJupiter: glassJupiterSystem,
+  kepler10System: kepler10System,
+  proximaCentauri: proximaCentauriSystem,
+};
+
+const formatNumber = (value) => {
+  if (!Number.isFinite(value)) return null;
+  return Number.isInteger(value) ? `${value}` : value.toFixed(1);
+};
+
+const buildStarTitle = (system) => {
+  const stars = system?.stars ?? [];
+  if (!stars.length) return system?.name ?? 'Star';
+  if (stars.length === 1) return stars[0].name ?? system?.name ?? 'Star';
+  return stars
+    .map((star) => star.name ?? star.id)
+    .filter(Boolean)
+    .join(' + ');
+};
+
+const buildStarFact = (system) => {
+  const stars = system?.stars ?? [];
+  if (!stars.length) return null;
+  if (stars.length === 2) return 'Binary star system with two host stars.';
+  if (stars.length > 2) return `Multi-star system with ${stars.length} host stars.`;
+  const star = stars[0];
+  const radius = formatNumber(star.radius);
+  if (radius) return `${star.name ?? 'Host star'} is shown with a scaled radius of ${radius} units.`;
+  return `${star.name ?? 'Host star'} anchors this system.`;
+};
 
 const AstroDetail = () => {
   const { id } = useParams();
   const [rotationSpeed, setRotationSpeed] = useState(1);
+  const [selectedPlanet, setSelectedPlanet] = useState(null);
+  const [selectedSystemName, setSelectedSystemName] = useState(null);
+  const [selectedPlanetId, setSelectedPlanetId] = useState(null);
+  const planetRefs = useRef({});
+  const controlsRef = useRef(null);
 
   // Find the astro data from moreAstrosData
   const astroData = useMemo(() => {
@@ -22,6 +63,36 @@ const AstroDetail = () => {
     }
     return null;
   }, [id]);
+
+  const systemForDescription = useMemo(() => {
+    const modelKey = astroData?.modelInstances?.find(
+      (instance) => systemByModelKey[instance.key]
+    )?.key;
+    if (!modelKey) return null;
+    return systemByModelKey[modelKey] ?? null;
+  }, [astroData]);
+
+  const starTitle = useMemo(
+    () => buildStarTitle(systemForDescription),
+    [systemForDescription]
+  );
+
+  const starFact = useMemo(
+    () => buildStarFact(systemForDescription),
+    [systemForDescription]
+  );
+
+  const handlePlanetClick = (planet, system) => {
+    setSelectedPlanet(planet ?? null);
+    setSelectedSystemName(system?.name ?? null);
+    setSelectedPlanetId(planet?.id ?? null);
+  };
+
+  const handleResetSelection = () => {
+    setSelectedPlanet(null);
+    setSelectedSystemName(null);
+    setSelectedPlanetId(null);
+  };
 
   return (
     <section className="home-section">
@@ -81,14 +152,38 @@ const AstroDetail = () => {
           {astroData?.modelInstances?.map((instance, idx) => {
             const ModelComponent = modelRegistry[instance.key];
             if (!ModelComponent) return null;
-            // Pass rotationSpeed as speedMultiplier for GlassJupiter
-            if (instance.key === 'glassJupiter') {
-              return <ModelComponent key={idx} {...instance} speedMultiplier={rotationSpeed} />;
+
+            const supportsPlanetSelection = ['glassJupiter', 'kepler10System', 'proximaCentauri'].includes(instance.key);
+
+            if (supportsPlanetSelection) {
+              return (
+                <ModelComponent
+                  key={idx}
+                  {...instance}
+                  speedMultiplier={rotationSpeed}
+                  onPlanetClick={handlePlanetClick}
+                  onPlanetRef={(name, ref) => {
+                    if (ref) {
+                      planetRefs.current[name] = ref;
+                    } else {
+                      delete planetRefs.current[name];
+                    }
+                  }}
+                />
+              );
             }
+
             return <ModelComponent key={idx} {...instance} />;
           })}
           
+          <CameraController
+            selectedPlanet={selectedPlanetId}
+            planetRefs={planetRefs}
+            controlsRef={controlsRef}
+            onResetSelection={handleResetSelection}
+          />
           <OrbitControls 
+            ref={controlsRef}
             enableZoom={true}
             enablePan={true}
             enableRotate={true}
@@ -104,6 +199,25 @@ const AstroDetail = () => {
                 </EffectComposer>
         </Suspense>
       </Canvas>
+      {systemForDescription && starFact ? (
+        <SolarDescription
+          title={starTitle}
+          body={starFact}
+          hint={null}
+          ariaLabel={`${starTitle} star fact`}
+        />
+      ) : null}
+      {selectedPlanet && (
+        <PlanetSystemInfo
+          planet={selectedPlanet}
+          systemName={selectedSystemName}
+          onClose={() => {
+            setSelectedPlanet(null);
+            setSelectedSystemName(null);
+            setSelectedPlanetId(null);
+          }}
+        />
+      )}
     </section>
   );
 };

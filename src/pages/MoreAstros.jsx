@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './MoreAstros.css'
 import AstroCategorySection from '../components/AstroCategorySection'
-import AstroDetailModal from '../components/AstroDetailModal'
 import { moreAstrosCategories } from '../data/moreAstrosData'
 
 const normalize = (value) => (value ?? '').toString().toLowerCase().trim()
@@ -26,7 +25,6 @@ const matchesQuery = (astro, query) => {
 const MoreAstros = () => {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
-  const [selected, setSelected] = useState(null)
 
   const filteredCategories = useMemo(() => {
     const q = normalize(query)
@@ -43,19 +41,8 @@ const MoreAstros = () => {
     [filteredCategories]
   )
 
-  const selectedCategoryTitle = useMemo(() => {
-    if (!selected) return ''
-    const category = moreAstrosCategories.find((c) =>
-      c.items.some((it) => it.id === selected.id)
-    )
-    return category?.title ?? 'Discovery'
-  }, [selected])
-
-  const handleSelectAstro = (astro) => setSelected(astro)
-
-  const handleNavigate = (astro) => {
+  const handleSelectAstro = (astro) => {
     if (astro?.route) {
-      setSelected(null)
       navigate(astro.route)
     }
   }
@@ -67,8 +54,7 @@ const MoreAstros = () => {
           <h1 className="more-astros-title">More Astros</h1>
           <p className="more-astros-subtitle">
             Explore extreme planets, other solar systems, and stellar objects.
-            Tap a card to open a quick detail view — later you can wire any item
-            to a dedicated route.
+            Tap a card to jump straight to its dedicated page.
           </p>
 
           <div className="more-astros-toolbar">
@@ -99,15 +85,10 @@ const MoreAstros = () => {
           ))
         )}
       </div>
-
-      <AstroDetailModal
-        astro={selected}
-        categoryTitle={selectedCategoryTitle}
-        onClose={() => setSelected(null)}
-        onNavigate={handleNavigate}
-      />
     </section>
   )
 }
 
 export default MoreAstros
+
+

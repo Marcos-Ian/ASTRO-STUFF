@@ -1,8 +1,8 @@
 import React from 'react';
 import { PlanetSystem } from './planetSystem';
-import { glassJupiterSystem } from '../data/planetSystems';
+import { kepler10System } from '../data/planetSystems';
 
-export default function GlassJupiter({
+export default function Kepler10System({
   position = [0, 0, 0],
   scale = 1,
   speedMultiplier = 1,
@@ -12,10 +12,10 @@ export default function GlassJupiter({
   return (
     <group position={position} scale={scale}>
       <PlanetSystem
-        system={glassJupiterSystem}
+        system={kepler10System}
         speedMultiplier={speedMultiplier}
         onPlanetClick={(planet) => {
-          if (onPlanetClick) onPlanetClick(planet, glassJupiterSystem);
+          if (onPlanetClick) onPlanetClick(planet, kepler10System);
         }}
         onPlanetRef={onPlanetRef}
       />

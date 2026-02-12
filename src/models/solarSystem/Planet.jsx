@@ -107,7 +107,7 @@ export function Planet({
               color: 'white',
               padding: '4px 12px',
               borderRadius: '6px',
-              fontSize: '450px',
+              fontSize: '400px',
               fontWeight: 700,
               whiteSpace: 'nowrap',
               fontFamily: 'Orbitron, sans-serif',
