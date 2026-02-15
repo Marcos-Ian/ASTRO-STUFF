@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Sphere, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
@@ -13,21 +13,24 @@ export function Sun({ speedMultiplier = 1 }) {
   const coronaRef = useRef();
   const glowRef = useRef();
 
-  const sunTexture = useTexture('/textures/sun.jpg', undefined, () => {
+  const sourceSunTexture = useTexture('/textures/sun.jpg', undefined, () => {
     console.warn('Failed to load sun texture: /textures/sun.jpg');
   });
+  const sunTexture = useMemo(() => {
+    if (!sourceSunTexture) return null;
+    const nextTexture = sourceSunTexture.clone();
+    nextTexture.colorSpace = THREE.SRGBColorSpace;
+    nextTexture.anisotropy = 16;
+    nextTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    nextTexture.magFilter = THREE.LinearFilter;
+    nextTexture.needsUpdate = true;
+    return nextTexture;
+  }, [sourceSunTexture]);
 
-  // Improve texture clarity + correct color space
   useEffect(() => {
-    if (!sunTexture) return;
-
-    // If you use R3F's <Canvas gl={{ outputColorSpace: THREE.SRGBColorSpace }} />
-    // this still helps keep the texture correct + sharp.
-    sunTexture.colorSpace = THREE.SRGBColorSpace;
-    sunTexture.anisotropy = 16;
-    sunTexture.minFilter = THREE.LinearMipmapLinearFilter;
-    sunTexture.magFilter = THREE.LinearFilter;
-    sunTexture.needsUpdate = true;
+    return () => {
+      if (sunTexture) sunTexture.dispose();
+    };
   }, [sunTexture]);
 
   useFrame(({ clock }) => {

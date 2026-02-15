@@ -8,7 +8,7 @@ const StarInfo = ({ star, systemName, onClose }) => {
     if (!star) return undefined;
     const timer = setTimeout(() => setIsVisible(true), 10);
     return () => clearTimeout(timer);
-  }, [star?.id]);
+  }, [star]);
 
   const handleClose = () => {
     setIsVisible(false);

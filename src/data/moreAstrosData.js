@@ -1,4 +1,4 @@
-export const moreAstrosCategories = [
+﻿export const moreAstrosCategories = [
   {
     id: 'extreme-planets',
     title: 'Extreme Planets',
@@ -9,7 +9,11 @@ export const moreAstrosCategories = [
         id: '55-cancri-e',
         name: '55 Cancri e',
         subtitle: 'Lava World • Super-Earth',
+        route: '/astros/55-cancri-e',
+         cardImage: '/CardImage/55 Cancri.png',
+        modelInstances: [{ key: 'cancri55System', position: [0, 0, 0], scale: 1 }],
         // tags removed
+        // Add an image path from /public, e.g. '/textures/HD189733b.png'
         preview: { type: 'gradient', accent: '#c084fc' },
         facts: [
           'Orbits its star in ~18 hours',
@@ -23,6 +27,7 @@ export const moreAstrosCategories = [
         subtitle: 'Hot Jupiter • “Raining Glass”',
         route: '/astros/hd-189733b',
         modelInstances: [{ key: 'glassJupiter', position: [0, 0, 0], scale: 1 }],
+        cardImage: '/CardImage/HD189733b.png',
         preview: { type: 'gradient', accent: '#60a5fa' },
         facts: [
           'Violent winds can exceed ~5,000 mph (model-dependent)',
@@ -34,7 +39,9 @@ export const moreAstrosCategories = [
         id: 'wasp-121b',
         name: 'WASP-121 b',
         subtitle: 'Ultra-hot Jupiter • Stratosphere',
-        // tags removed
+        route: '/astros/WASP121-B',
+        modelInstances: [{ key: 'wasp121System', position: [0, 0, 0], scale: 1 }],
+        cardImage: '/CardImage/WASP121-B.png',
         preview: { type: 'gradient', accent: '#f472b6' },
         facts: [
           'So hot it can vaporize metals',
@@ -49,6 +56,7 @@ export const moreAstrosCategories = [
         route: '/astros/kepler-10b',
         modelInstances: [{ key: 'kepler10System', position: [0, 0, 0], scale: 1 }],
         // tags removed
+        cardImage: '/CardImage/kepler-10b.png',
         preview: { type: 'gradient', accent: '#a78bfa' },
         facts: [
           'One of the first confirmed rocky exoplanets',
@@ -69,6 +77,7 @@ export const moreAstrosCategories = [
         name: 'TRAPPIST-1',
         subtitle: '7 Worlds • Ultra-cool Dwarf',
         // tags removed
+        cardImage: '',
         preview: { type: 'gradient', accent: '#22c55e' },
         facts: [
           'Seven Earth-sized planets',
@@ -78,14 +87,17 @@ export const moreAstrosCategories = [
       },
       {
         id: 'kepler-90',
-        name: 'Kepler-90',
+        name: 'Kepler-90 System',
+        route: '/astros/kepler-90',
+        modelInstances: [{ key: 'kepler90System', position: [0, 0, 0], scale: 1 }],
         subtitle: '8 Planets • Sun-like Star',
         // tags removed
+        cardImage: '  /CardImage/Kepler90.png',
         preview: { type: 'gradient', accent: '#f59e0b' },
         facts: [
-          'An eight-planet system (like our Solar System in count)',
-          'Includes planets from super-Earths to gas giants',
-          'Discovered with Kepler data + ML methods',
+          'Contains eight known planets: Kepler-90 b, c, i, d, e, f, g, and h',
+          'Its layout is often compared to a compacted version of our Solar System',
+          'Kepler archival data plus ML-assisted vetting helped confirm Kepler-90 i',
         ],
       },
       {
@@ -93,6 +105,7 @@ export const moreAstrosCategories = [
         name: 'HR 8799',
         subtitle: 'Directly Imaged Giants',
         // tags removed
+        cardImage: '',
         preview: { type: 'gradient', accent: '#38bdf8' },
         facts: [
           'Multiple massive planets imaged directly',
@@ -107,6 +120,7 @@ export const moreAstrosCategories = [
         route: '/astros/proxima-centauri',
         modelInstances: [{ key: 'proximaCentauri', position: [0, 0, 0], scale: 1 }],
         // tags removed
+        cardImage: '/CardImage/ProximaCentauri.png',
         preview: { type: 'gradient', accent: '#ef4444' },
         facts: [
           'Closest star to the Sun',
@@ -127,6 +141,7 @@ export const moreAstrosCategories = [
         name: 'Pulsar',
         subtitle: 'Rotating Neutron Star',
         // tags removed
+        cardImage: '',
         preview: { type: 'gradient', accent: '#93c5fd' },
         facts: [
           'Dense stellar remnant with intense magnetic fields',
@@ -139,6 +154,7 @@ export const moreAstrosCategories = [
         name: 'Magnetar',
         subtitle: 'Extreme Magnetic Field',
         // tags removed
+        cardImage: '',
         preview: { type: 'gradient', accent: '#e879f9' },
         facts: [
           'Magnetic field can be trillions of times stronger than Earth’s',
@@ -151,6 +167,7 @@ export const moreAstrosCategories = [
         name: 'White Dwarf',
         subtitle: 'Stellar Core Remnant',
         // tags removed
+        cardImage: '',
         preview: { type: 'gradient', accent: '#f8fafc' },
         facts: [
           'Earth-sized but with Sun-like mass',
@@ -163,6 +180,7 @@ export const moreAstrosCategories = [
         name: 'Red Giant',
         subtitle: 'Expanded Late-stage Star',
         // tags removed
+        cardImage: '',
         preview: { type: 'gradient', accent: '#fb7185' },
         facts: [
           'Occurs when a star exhausts core hydrogen',

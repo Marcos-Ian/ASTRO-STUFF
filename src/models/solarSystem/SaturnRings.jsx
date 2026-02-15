@@ -1,6 +1,11 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
 
+const hash2D = (x, y) => {
+  const value = Math.sin(x * 127.1 + y * 311.7) * 43758.5453123;
+  return value - Math.floor(value);
+};
+
 /* =======================
    Saturn Rings
    NOTE: Put this inside tiltChildren so it follows Saturn tilt
@@ -54,7 +59,7 @@ export function SaturnRings() {
       const band = 0.06 * Math.sin(y * 0.05) + 0.04 * Math.sin(y * 0.013);
       for (let x = 0; x < canvas.width; x++) {
         const i = (y * canvas.width + x) * 4;
-        const n = (Math.random() - 0.5) * 0.12; // subtle grain
+        const n = (hash2D(x + 1, y + 1) - 0.5) * 0.12; // subtle grain
         d[i + 0] = Math.min(255, d[i + 0] * (1 + band + n)); // R
         d[i + 1] = Math.min(255, d[i + 1] * (1 + band + n)); // G
         d[i + 2] = Math.min(255, d[i + 2] * (1 + band + n)); // B

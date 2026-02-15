@@ -7,6 +7,11 @@ const AstroCard = ({ astro, onClick }) => {
   const cardRef = useRef(null)
 
   const accent = useMemo(() => astro?.preview?.accent || '#c084fc', [astro])
+  const previewImageSrc = useMemo(() => {
+    if (astro?.cardImage) return astro.cardImage
+    if (astro?.preview?.type === 'image') return astro?.preview?.src
+    return null
+  }, [astro])
 
   const handleMove = (e) => {
     const el = cardRef.current
@@ -45,8 +50,8 @@ const AstroCard = ({ astro, onClick }) => {
       onClick={() => onClick?.(astro)}
     >
       <div className="astro-card__preview" aria-hidden="true">
-        {astro?.preview?.type === 'image' ? (
-          <img className="astro-card__img" src={astro.preview.src} alt="" loading="lazy" />
+        {previewImageSrc ? (
+          <img className="astro-card__img" src={previewImageSrc} alt="" loading="lazy" />
         ) : (
           <div className="astro-card__orb" />
         )}

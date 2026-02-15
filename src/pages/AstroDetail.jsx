@@ -7,7 +7,14 @@ import Loader from '../components/Loader';
 import StarSphere from '../models/StarSphere';
 import { modelRegistry } from '../models';
 import { moreAstrosCategories } from '../data/moreAstrosData';
-import { glassJupiterSystem, kepler10System, proximaCentauriSystem } from '../data/planetSystems';
+import {
+  cancri55System,
+  glassJupiterSystem,
+  kepler10System,
+  kepler90System,
+  proximaCentauriSystem,
+  wasp121System,
+} from '../data/planetSystems';
 import * as THREE from 'three';
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import PlanetSystemInfo from '../components/PlanetSystemInfo';
@@ -16,9 +23,12 @@ import SolarDescription from '../components/SolarDescription';
 import StarInfo from '../components/StarInfo';
 
 const systemByModelKey = {
+  cancri55System: cancri55System,
   glassJupiter: glassJupiterSystem,
   kepler10System: kepler10System,
+  kepler90System: kepler90System,
   proximaCentauri: proximaCentauriSystem,
+  wasp121System: wasp121System,
 };
 
 const formatNumber = (value) => {
@@ -168,7 +178,14 @@ const AstroDetail = () => {
             const ModelComponent = modelRegistry[instance.key];
             if (!ModelComponent) return null;
 
-            const supportsPlanetSelection = ['glassJupiter', 'kepler10System', 'proximaCentauri'].includes(instance.key);
+            const supportsPlanetSelection = [
+              'cancri55System',
+              'glassJupiter',
+              'kepler10System',
+              'kepler90System',
+              'proximaCentauri',
+              'wasp121System',
+            ].includes(instance.key);
 
             if (supportsPlanetSelection) {
               return (

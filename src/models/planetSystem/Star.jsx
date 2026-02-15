@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { Html, useTexture } from '@react-three/drei';
 import { useSpin } from './useSpin';
 
 export function Star({
-  name,
   radius,
   color = '#ffffff',
   texture,
@@ -18,15 +17,22 @@ export function Star({
   starData,
 }) {
   const starRef = useRef();
-  const starTexture = useTexture(texture || '/textures/sun.jpg');
+  const sourceStarTexture = useTexture(texture || '/textures/sun.jpg');
+  const starTexture = useMemo(() => {
+    if (!sourceStarTexture) return null;
+    const nextTexture = sourceStarTexture.clone();
+    nextTexture.colorSpace = THREE.SRGBColorSpace;
+    nextTexture.anisotropy = 16;
+    nextTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    nextTexture.magFilter = THREE.LinearFilter;
+    nextTexture.needsUpdate = true;
+    return nextTexture;
+  }, [sourceStarTexture]);
 
   useEffect(() => {
-    if (!starTexture) return;
-    starTexture.colorSpace = THREE.SRGBColorSpace;
-    starTexture.anisotropy = 16;
-    starTexture.minFilter = THREE.LinearMipmapLinearFilter;
-    starTexture.magFilter = THREE.LinearFilter;
-    starTexture.needsUpdate = true;
+    return () => {
+      if (starTexture) starTexture.dispose();
+    };
   }, [starTexture]);
 
   useSpin(starRef, { speed: rotationSpeed, speedMultiplier });
@@ -55,7 +61,7 @@ export function Star({
         <sphereGeometry args={[radius, 64, 64]} />
         <meshBasicMaterial map={starTexture} color={color} toneMapped />
       </mesh>
-      {name && (
+      {/* {name && (
         <Html
           position={[0, -(radius + 10), 0]}
           center
@@ -81,7 +87,7 @@ export function Star({
             {name}
           </div>
         </Html>
-      )}
+      )} */}
       {glow && (
         <mesh>
           <sphereGeometry args={[radius * (glow.scale ?? 1.03), 64, 64]} />

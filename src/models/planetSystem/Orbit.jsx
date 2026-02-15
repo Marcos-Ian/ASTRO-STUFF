@@ -5,6 +5,8 @@ import * as THREE from 'three';
 const TWO_PI = Math.PI * 2;
 const X_AXIS = new THREE.Vector3(1, 0, 0);
 const Y_AXIS = new THREE.Vector3(0, 1, 0);
+const ORBIT_TIME_SCALE = 0.08;
+const FRAME_TIME_BASELINE = 1 / 60;
 
 const solveKepler = (meanAnomaly, eccentricity) => {
   if (eccentricity === 0) return meanAnomaly;
@@ -17,6 +19,19 @@ const solveKepler = (meanAnomaly, eccentricity) => {
   return eccentricAnomaly;
 };
 
+const setOrbitalPlanePosition = (target, semiMajor, eccentricity, eccentricAnomaly) => {
+  const cosEccentricAnomaly = Math.cos(eccentricAnomaly);
+  const sinEccentricAnomaly = Math.sin(eccentricAnomaly);
+  const semiMinor = semiMajor * Math.sqrt(Math.max(0, 1 - eccentricity * eccentricity));
+
+  // Parametric ellipse from eccentric anomaly avoids branch jumps around +/-PI.
+  target.set(
+    semiMajor * (cosEccentricAnomaly - eccentricity),
+    0,
+    semiMinor * sinEccentricAnomaly
+  );
+};
+
 export function Orbit({
   radius = 0,
   semiMajorAxis,
@@ -27,6 +42,7 @@ export function Orbit({
   inclination = 0,
   argumentOfPeriapsis = 0,
   longitudeOfAscendingNode = 0,
+  lockToCenter = false,
   flatten = false,
   speedMultiplier = 1,
   children,
@@ -48,28 +64,21 @@ export function Orbit({
     meanAnomalyRef.current = THREE.MathUtils.degToRad(phase ?? 0);
   }, [phase]);
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     if (!orbitRef.current) return;
 
     const semiAxis = semiMajorAxis ?? radius ?? 0;
     const clampedEccentricity = THREE.MathUtils.clamp(eccentricity ?? 0, 0, 0.99);
     const meanMotion = Number.isFinite(period) && period !== 0 ? TWO_PI / period : speed;
-
+    const scaledMeanMotion =
+      meanMotion * ORBIT_TIME_SCALE * speedMultiplier * FRAME_TIME_BASELINE;
     meanAnomalyRef.current = THREE.MathUtils.euclideanModulo(
-      meanAnomalyRef.current + meanMotion * speedMultiplier * delta,
+      meanAnomalyRef.current + scaledMeanMotion,
       TWO_PI
     );
-
     const meanAnomaly = meanAnomalyRef.current;
     const eccentricAnomaly = solveKepler(meanAnomaly, clampedEccentricity);
-    const cosEccentricAnomaly = Math.cos(eccentricAnomaly);
-    const r = semiAxis * (1 - clampedEccentricity * cosEccentricAnomaly);
-    const trueAnomaly = 2 * Math.atan2(
-      Math.sqrt(1 + clampedEccentricity) * Math.sin(eccentricAnomaly / 2),
-      Math.sqrt(1 - clampedEccentricity) * Math.cos(eccentricAnomaly / 2)
-    );
-
-    position.set(r * Math.cos(trueAnomaly), 0, r * Math.sin(trueAnomaly));
+    setOrbitalPlanePosition(position, semiAxis, clampedEccentricity, eccentricAnomaly);
     position.applyAxisAngle(Y_AXIS, angles.argumentOfPeriapsis);
     if (!flatten) {
       position.applyAxisAngle(X_AXIS, angles.inclination);
@@ -77,6 +86,9 @@ export function Orbit({
     position.applyAxisAngle(Y_AXIS, angles.longitudeOfAscendingNode);
 
     orbitRef.current.position.copy(position);
+    if (lockToCenter) {
+      orbitRef.current.lookAt(0, 0, 0);
+    }
   });
 
   return <group ref={orbitRef}>{children}</group>;

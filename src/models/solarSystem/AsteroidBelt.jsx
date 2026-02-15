@@ -2,6 +2,11 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
+const hash = (seed) => {
+  const value = Math.sin(seed) * 43758.5453123;
+  return value - Math.floor(value);
+};
+
 /* =======================
    Asteroid Belt (Main Belt Example)
    - Uses InstancedMesh for performance
@@ -25,19 +30,19 @@ export function AsteroidBelt({
   const asteroids = useMemo(() => {
     const arr = [];
     for (let i = 0; i < count; i++) {
-      // Random angle
-      const theta = Math.random() * Math.PI * 2;
-      // Random radius within belt
-      const r = innerRadius + Math.random() * (outerRadius - innerRadius);
-      // Random vertical offset for thickness
-      const y = (Math.random() - 0.5) * beltWidth;
+      // Deterministic pseudo-random values keep render output idempotent.
+      const theta = hash(i * 17.13 + 0.1) * Math.PI * 2;
+      const r = innerRadius + hash(i * 31.7 + 1.3) * (outerRadius - innerRadius);
+      const y = (hash(i * 47.9 + 2.7) - 0.5) * beltWidth;
       // Position
       const x = Math.cos(theta) * r;
       const z = Math.sin(theta) * r;
-      // Random scale
-      const scale = minSize + Math.random() * (maxSize - minSize);
-      // Random rotation
-      const rot = [Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI];
+      const scale = minSize + hash(i * 59.2 + 3.1) * (maxSize - minSize);
+      const rot = [
+        hash(i * 71.4 + 4.2) * Math.PI,
+        hash(i * 83.6 + 5.8) * Math.PI,
+        hash(i * 97.1 + 6.4) * Math.PI,
+      ];
       arr.push({ position: [x, y, z], scale, rotation: rot });
     }
     return arr;

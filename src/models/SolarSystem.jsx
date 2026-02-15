@@ -8,7 +8,7 @@ import { Sun } from './solarSystem/Sun';
 /* =======================
    Solar System
 ======================= */
-export function SolarSystem({ onPlanetClick, selectedPlanet, onPlanetRef, rotationSpeed = 1, ...props }) {
+export function SolarSystem({ onPlanetClick, onPlanetRef, rotationSpeed = 1, ...props }) {
   // Less compression so Mars → Belt gap is clearer
 
   // Transform the planet data from JSON, applying the compressed orbit radius

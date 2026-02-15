@@ -25,17 +25,24 @@ export function Planet({
 }) {
   const planetRef = useRef();
   const planetGroupRef = useRef();
-  const planetTexture = useTexture(texture || '/textures/earth.jpg');
+  const sourcePlanetTexture = useTexture(texture || '/textures/earth.jpg');
+  const planetTexture = useMemo(() => {
+    if (!sourcePlanetTexture) return null;
+    const nextTexture = sourcePlanetTexture.clone();
+    nextTexture.colorSpace = THREE.SRGBColorSpace;
+    nextTexture.anisotropy = 16;
+    nextTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    nextTexture.magFilter = THREE.LinearFilter;
+    nextTexture.wrapS = THREE.RepeatWrapping;
+    nextTexture.wrapT = THREE.ClampToEdgeWrapping;
+    nextTexture.needsUpdate = true;
+    return nextTexture;
+  }, [sourcePlanetTexture]);
 
   useEffect(() => {
-    if (!planetTexture) return;
-    planetTexture.colorSpace = THREE.SRGBColorSpace;
-    planetTexture.anisotropy = 16;
-    planetTexture.minFilter = THREE.LinearMipmapLinearFilter;
-    planetTexture.magFilter = THREE.LinearFilter;
-    planetTexture.wrapS = THREE.RepeatWrapping;
-    planetTexture.wrapT = THREE.ClampToEdgeWrapping;
-    planetTexture.needsUpdate = true;
+    return () => {
+      if (planetTexture) planetTexture.dispose();
+    };
   }, [planetTexture]);
 
   useSpin(planetRef, { speed: rotationSpeed, speedMultiplier });
@@ -49,15 +56,23 @@ export function Planet({
     };
   }, [onPlanetRef, planetId]);
 
-  const ringTexture = useTexture(rings?.texture || '/textures/saturn_rings.png');
+  const sourceRingTexture = useTexture(rings?.texture || '/textures/saturn_rings.png');
+  const ringTexture = useMemo(() => {
+    if (!rings?.texture || !sourceRingTexture) return null;
+    const nextTexture = sourceRingTexture.clone();
+    nextTexture.colorSpace = THREE.SRGBColorSpace;
+    nextTexture.anisotropy = 8;
+    nextTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    nextTexture.magFilter = THREE.LinearFilter;
+    nextTexture.needsUpdate = true;
+    return nextTexture;
+  }, [rings?.texture, sourceRingTexture]);
+
   useEffect(() => {
-    if (!rings || !ringTexture) return;
-    ringTexture.colorSpace = THREE.SRGBColorSpace;
-    ringTexture.anisotropy = 8;
-    ringTexture.minFilter = THREE.LinearMipmapLinearFilter;
-    ringTexture.magFilter = THREE.LinearFilter;
-    ringTexture.needsUpdate = true;
-  }, [rings, ringTexture]);
+    return () => {
+      if (ringTexture) ringTexture.dispose();
+    };
+  }, [ringTexture]);
 
   const ringGeometry = useMemo(() => {
     if (!rings) return null;
@@ -107,7 +122,7 @@ export function Planet({
         )}
       </mesh>
 
-      {planetData?.name && (
+      {/* {planetData?.name && (
         <Html
           position={[0, -(radius + 10), 0]}
           center
@@ -133,7 +148,7 @@ export function Planet({
             {planetData.name}
           </div>
         </Html>
-      )}
+      )} */}
 
       {atmosphere && (
         <mesh>
@@ -162,7 +177,7 @@ export function Planet({
       {rings && ringGeometry && (
         <mesh rotation={[Math.PI / 2, 0, 0]} geometry={ringGeometry}>
           <meshStandardMaterial
-            map={rings.texture ? ringTexture : null}
+            map={ringTexture}
             color={rings.color ?? '#d1c3a1'}
             transparent
             opacity={rings.opacity ?? 0.8}

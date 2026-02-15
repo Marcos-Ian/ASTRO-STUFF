@@ -74,6 +74,7 @@ export function PlanetSystem({
           inclination={planet.orbit?.inclination ?? 0}
           argumentOfPeriapsis={planet.orbit?.argumentOfPeriapsis}
           longitudeOfAscendingNode={planet.orbit?.longitudeOfAscendingNode}
+          lockToCenter={Boolean(planet.tidallyLocked)}
           flatten
           speedMultiplier={speedMultiplier}
         >
