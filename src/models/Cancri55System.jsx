@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import { Orbit, Planet, Star } from './planetSystem';
 import { cancri55System } from '../data/planetSystems';
 
+const CANCRI55_SPEED_BOOST = 20;
+
 export default function Cancri55System({
   position = [0, 0, 0],
   scale = 1,
@@ -11,6 +13,7 @@ export default function Cancri55System({
   onStarClick,
 }) {
   const { stars = [], planets = [] } = cancri55System;
+  const systemSpeedMultiplier = speedMultiplier * CANCRI55_SPEED_BOOST;
 
   const starById = useMemo(() => {
     const map = new Map();
@@ -39,7 +42,7 @@ export default function Cancri55System({
       distance={star.distance}
       decay={star.decay}
       rotationSpeed={star.rotationSpeed}
-      speedMultiplier={speedMultiplier}
+      speedMultiplier={systemSpeedMultiplier}
       glow={star.glow}
       onClick={onStarClick ? handleStarClick : null}
       starData={star}
@@ -60,7 +63,7 @@ export default function Cancri55System({
         argumentOfPeriapsis={orbit.argumentOfPeriapsis}
         longitudeOfAscendingNode={orbit.longitudeOfAscendingNode}
         flatten
-        speedMultiplier={speedMultiplier}
+        speedMultiplier={systemSpeedMultiplier}
       >
         {body}
       </Orbit>
@@ -84,7 +87,7 @@ export default function Cancri55System({
           longitudeOfAscendingNode={planet.orbit?.longitudeOfAscendingNode}
           lockToCenter={Boolean(planet.tidallyLocked)}
           flatten
-          speedMultiplier={speedMultiplier}
+          speedMultiplier={systemSpeedMultiplier}
         >
           <Planet
             radius={planet.radius}
@@ -92,8 +95,15 @@ export default function Cancri55System({
             texture={planet.texture}
             rotationSpeed={planet.rotationSpeed}
             axialTilt={planet.axialTilt}
-            speedMultiplier={speedMultiplier}
-            material={planet.material}
+            speedMultiplier={systemSpeedMultiplier}
+            material={
+              planet.material
+                ? {
+                    ...planet.material,
+                    speed: (planet.material.speed ?? 1) * systemSpeedMultiplier,
+                  }
+                : planet.material
+            }
             rings={planet.rings}
             atmosphere={planet.atmosphere}
             glow={planet.glow}

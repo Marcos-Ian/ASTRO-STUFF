@@ -8,7 +8,7 @@
       {
         id: '55-cancri-e',
         name: '55 Cancri e',
-        subtitle: 'Lava World • Super-Earth',
+        subtitle: 'Diamond World • Super-Earth',
         route: '/astros/55-cancri-e',
          cardImage: '/CardImage/55 Cancri.png',
         modelInstances: [{ key: 'cancri55System', position: [0, 0, 0], scale: 1 }],
@@ -76,6 +76,8 @@
         id: 'trappist-1',
         name: 'TRAPPIST-1',
         subtitle: '7 Worlds • Ultra-cool Dwarf',
+        route: '/astros/trappist-1',
+        modelInstances: [{ key: 'trappistSystem', position: [0, 0, 0], scale: 1 }],
         // tags removed
         cardImage: '',
         preview: { type: 'gradient', accent: '#22c55e' },

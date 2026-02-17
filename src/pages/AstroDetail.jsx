@@ -13,6 +13,7 @@ import {
   kepler10System,
   kepler90System,
   proximaCentauriSystem,
+  trappistSystem,
   wasp121System,
 } from '../data/planetSystems';
 import * as THREE from 'three';
@@ -28,6 +29,7 @@ const systemByModelKey = {
   kepler10System: kepler10System,
   kepler90System: kepler90System,
   proximaCentauri: proximaCentauriSystem,
+  trappistSystem: trappistSystem,
   wasp121System: wasp121System,
 };
 
@@ -184,6 +186,7 @@ const AstroDetail = () => {
               'kepler10System',
               'kepler90System',
               'proximaCentauri',
+              'trappistSystem',
               'wasp121System',
             ].includes(instance.key);
 
