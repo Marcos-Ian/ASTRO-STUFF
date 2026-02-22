@@ -536,6 +536,107 @@ export const keplerBinarySystem = {
   ],
 };
 
+export const pulsarSystem = {
+  id: 'pulsar',
+  name: 'Pulsar',
+  stars: [
+    {
+      id: 'pulsar',
+      name: 'Pulsar',
+      type: 'Pulsar (Neutron Star)',
+      description:
+        'A rapidly rotating neutron star whose narrow radiation beams sweep across space like a lighthouse.',
+      facts: [
+        'Typically only tens of kilometers wide but packed with more mass than the Sun.',
+        'Its pulses are observed when one of its beams points toward Earth.',
+        'Some pulsars spin hundreds of times per second with extreme rotational stability.',
+      ],
+      radius: 20,
+      color: '#93c5fd',
+      texture: '/textures/pulsar.png',
+      intensity: 70000,
+      rotationSpeed: 12,
+     glow: { scale: 1.05, opacity: 0.38, color: '#7dd3fc' },
+      polarOutburst: {
+        color: '#7dd3fc',
+        lengthFactor: 14,
+        baseWidthFactor: 0.08,
+        farWidthFactor: 0.28,
+        opacity: 0.2,
+        burstOpacity: 0.45,
+        ringOpacity: 0.16,
+        cycleRate: 5.4,
+        burstRate: 1.3,
+        sharpness: 8,
+        strength: 1,
+      },
+    },
+  ],
+  planets: [],
+};
+
+export const magnetarSystem = {
+  id: 'magnetar',
+  name: 'Magnetar',
+  stars: [
+    {
+      id: 'magnetar',
+      name: 'Magnetar',
+      type: 'Magnetar (Neutron Star)',
+      description:
+        'An ultra-dense neutron star with an extreme magnetic field that can trigger violent high-energy outbursts.',
+      facts: [
+        'Only about tens of kilometers across, yet more massive than the Sun.',
+        'Its magnetic field can exceed 10^14-10^15 gauss.',
+        'Outbursts can release powerful X-ray and gamma-ray flares.',
+      ],
+      radius: 24,
+      color: '#d8b4fe',
+      texture: '/textures/magnetar.png',
+      intensity: 62000,
+      rotationSpeed: 3,
+      glow: { scale:  1.04, opacity: 0.36, color: '#B3DEFF' },
+      polarOutburst: {
+        color: '#B3DEFF',
+        lengthFactor: 14,
+        baseWidthFactor: 0.09,
+        farWidthFactor: 0.32,
+        opacity: 0.18,
+        burstOpacity: 0.4,
+        ringOpacity: 0.14,
+        cycleRate: 4.2,
+        burstRate: 1,
+        sharpness: 8,
+        strength: 0.92,
+      },
+      magneticArcs: {
+        color: '#B3DEFF',
+        surfaceFactor: 1.02,
+        segments: 180,
+        spinRate: 0.08,
+        wobble: 5,
+        shimmerRate: 0.52,
+        shimmerStrength: 0.16,
+        innerLayer: {
+          count: 9,
+          apexFactor: 0.92,
+          thicknessFactor: 0.0042,
+          opacity: 0.34,
+          phaseOffset: 0,
+        },
+        outerLayer: {
+          count: 8,
+          apexFactor: 2.75,
+          thicknessFactor: 0.0038,
+          opacity: 0.24,
+          phaseOffset: 0.5,
+        },
+      },
+    },
+  ],
+  planets: [],
+};
+
 const alphaCentauriMassA = 1.1;
 const alphaCentauriMassB = 0.907;
 const alphaCentauriTotalMass = alphaCentauriMassA + alphaCentauriMassB;
@@ -983,6 +1084,121 @@ export const kepler90System = {
       },
       atmosphere: { color: '#eab308', opacity: 0.06, scale: 1.02 },
       glow: { color: '#facc15', opacity: 0.1 },
+    },
+  ],
+};
+
+export const hr8799System = {
+  id: 'hr-8799',
+  name: 'HR 8799',
+  stars: [
+    {
+      id: 'hr-8799-a',
+      name: 'HR 8799',
+      type: 'Young A-type Star',
+      description:
+        'A luminous, young star hosting one of the first and most famous directly imaged multi-planet systems.',
+      facts: [
+        'Located roughly 129 light-years from Earth in the constellation Pegasus.',
+        'The system is young enough that its giant planets still radiate substantial formation heat.',
+        'A broad debris disk surrounds the planetary architecture.',
+      ],
+      radius: 88,
+      color: '#ffe3bf',
+      texture: '/textures/sun.jpg',
+      intensity: 136000,
+      rotationSpeed: 0.0009,
+      glow: { scale: 1.05, opacity: 0.24 },
+    },
+  ],
+  planets: [
+    {
+      id: 'hr-8799-e',
+      name: 'HR 8799 e',
+      type: 'Young Gas Giant',
+      radius: 13.5,
+      texture: '/textures/HR 8799 e.png',
+      rotationSpeed: 0.44,
+      description:
+        'The innermost known giant in the directly imaged HR 8799 system, orbiting inside the other three giants.',
+      facts: [
+        'Orbits at about 14.5 AU from HR 8799.',
+        'Likely several times Jupiter\'s mass.',
+        'Glows brightly in infrared due to retained formation heat.',
+      ],
+      orbit: {
+        au: 14.5,
+        radius: 240,
+        speed: 3.2,
+      },
+      atmosphere: { color: '#f59e0b', opacity: 0.11, scale: 1.03 },
+      glow: { color: '#fbbf24', opacity: 0.15 },
+    },
+    {
+      id: 'hr-8799-d',
+      name: 'HR 8799 d',
+      type: 'Young Gas Giant',
+      radius: 15.0,
+      texture: '/textures/saturn.jpg',
+      rotationSpeed: 0.36,
+      description:
+        'A massive outer giant in an intermediate orbit, part of the resonant chain proposed for system stability.',
+      facts: [
+        'Orbits near 24 AU from its host star.',
+        'Its orbit is likely coupled dynamically with planets c and e.',
+        'Atmospheric studies suggest thick clouds and non-equilibrium chemistry.',
+      ],
+      orbit: {
+        au: 24,
+        radius: 340,
+        speed: 2.2,
+      },
+      atmosphere: { color: '#fde68a', opacity: 0.1, scale: 1.03 },
+      glow: { color: '#fcd34d', opacity: 0.12 },
+    },
+    {
+      id: 'hr-8799-c',
+      name: 'HR 8799 c',
+      type: 'Young Gas Giant',
+      radius: 16.2,
+      texture: '/textures/uranus.jpg',
+      rotationSpeed: 0.31,
+      description:
+        'A wide-orbit giant directly imaged in infrared, helping define the architecture of this benchmark young system.',
+      facts: [
+        'Orbits at roughly 38 AU.',
+        'Its atmosphere likely contains thick cloud decks and carbon-bearing species.',
+        'Part of the original pair of HR 8799 planets announced in 2008.',
+      ],
+      orbit: {
+        au: 38,
+        radius: 470,
+        speed: 1.4,
+      },
+      atmosphere: { color: '#7dd3fc', opacity: 0.11, scale: 1.03 },
+      glow: { color: '#38bdf8', opacity: 0.11 },
+    },
+    {
+      id: 'hr-8799-b',
+      name: 'HR 8799 b',
+      type: 'Outer Young Gas Giant',
+      radius: 17.8,
+      texture: '/textures/neptune.jpg',
+      rotationSpeed: 0.24,
+      description:
+        'The outermost known planet in the system, on a very wide orbit that made early direct imaging feasible.',
+      facts: [
+        'Orbits near 68 AU from HR 8799.',
+        'Has one of the longest orbital periods in the system.',
+        'Its brightness in infrared helped establish direct-imaging exoplanet techniques.',
+      ],
+      orbit: {
+        au: 68,
+        radius: 640,
+        speed: 0.8,
+      },
+      atmosphere: { color: '#60a5fa', opacity: 0.1, scale: 1.02 },
+      glow: { color: '#93c5fd', opacity: 0.1 },
     },
   ],
 };

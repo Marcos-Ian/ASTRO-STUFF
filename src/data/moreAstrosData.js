@@ -39,7 +39,8 @@
         id: 'wasp-121b',
         name: 'WASP-121 b',
         subtitle: 'Ultra-hot Jupiter • Stratosphere',
-        route: '/astros/WASP121-B',
+        route: '/astros/wasp-121b',
+
         modelInstances: [{ key: 'wasp121System', position: [0, 0, 0], scale: 1 }],
         cardImage: '/CardImage/WASP121-B.png',
         preview: { type: 'gradient', accent: '#f472b6' },
@@ -79,7 +80,7 @@
         route: '/astros/trappist-1',
         modelInstances: [{ key: 'trappistSystem', position: [0, 0, 0], scale: 1 }],
         // tags removed
-        cardImage: '',
+        cardImage: ' /CardImage/TRAPPIST-1.png',
         preview: { type: 'gradient', accent: '#22c55e' },
         facts: [
           'Seven Earth-sized planets',
@@ -106,8 +107,10 @@
         id: 'hr-8799',
         name: 'HR 8799',
         subtitle: 'Directly Imaged Giants',
+        route: '/astros/hr-8799',
+        modelInstances: [{ key: 'hr8799System', position: [0, 0, 0], scale: 1 }],
         // tags removed
-        cardImage: '',
+        cardImage: '  /CardImage/HR 8799.png',
         preview: { type: 'gradient', accent: '#38bdf8' },
         facts: [
           'Multiple massive planets imaged directly',
@@ -142,8 +145,10 @@
         id: 'pulsar',
         name: 'Pulsar',
         subtitle: 'Rotating Neutron Star',
+        route: '/astros/pulsar',
+        modelInstances: [{ key: 'pulsarSystem', position: [0, 0, 0], scale: 1 }],
         // tags removed
-        cardImage: '',
+        cardImage: ' /CardImage/pulsar.png',
         preview: { type: 'gradient', accent: '#93c5fd' },
         facts: [
           'Dense stellar remnant with intense magnetic fields',
@@ -155,8 +160,10 @@
         id: 'magnetar',
         name: 'Magnetar',
         subtitle: 'Extreme Magnetic Field',
+        route: '/astros/magnetar',
+        modelInstances: [{ key: 'magnetarSystem', position: [0, 0, 0], scale: 1 }],
         // tags removed
-        cardImage: '',
+        cardImage: '/CardImage/magnetar.png',
         preview: { type: 'gradient', accent: '#e879f9' },
         facts: [
           'Magnetic field can be trillions of times stronger than Earth’s',
