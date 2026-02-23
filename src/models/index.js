@@ -1,3 +1,4 @@
+import BlackHole from './BlackHole'
 import Cancri55System from './Cancri55System'
 import GlassJupiter from './GlassJupiter'
 import Hr8799System from './Hr8799System'
@@ -9,9 +10,11 @@ import ProximaCentauriSystem from './ProximaCentauriSystem'
 import SolarSystem from './SolarSystem'
 import StarSphere from './StarSphere'
 import TrappistSystem from './TrappistSystem'
+import WhiteDwarf from './WhiteDwarf'
 import Wasp121System from './Wasp121System'
 
 export const modelRegistry = {
+  blackHole: BlackHole,
   cancri55System: Cancri55System,
   glassJupiter: GlassJupiter,
   hr8799System: Hr8799System,
@@ -21,6 +24,7 @@ export const modelRegistry = {
   pulsarSystem: PulsarSystem,
   proximaCentauri: ProximaCentauriSystem,
   trappistSystem: TrappistSystem,
+  whiteDwarf: WhiteDwarf,
   wasp121System: Wasp121System,
   solarSystem: SolarSystem,
   starSphere: StarSphere,

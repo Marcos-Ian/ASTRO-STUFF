@@ -172,11 +172,27 @@
         ],
       },
       {
+        id: 'black-hole',
+        name: 'Black Hole',
+        subtitle: 'Event Horizon • Compact Object',
+        route: '/astros/black-hole',
+        modelInstances: [{ key: 'blackHole', position: [0, 0, 0], scale: 50 }],
+        cardImage: '/CardImage/blackhole.png',
+        preview: { type: 'gradient', accent: '#38bdf8' },
+        facts: [
+          'A gravity well so strong that light cannot escape from within the event horizon',
+          'Can form from massive stars after core collapse',
+          'Accretion disks can heat up and emit intense X-rays',
+        ],
+      },
+      {
         id: 'white-dwarf',
         name: 'White Dwarf',
         subtitle: 'Stellar Core Remnant',
+        route: '/astros/white-dwarf',
+        modelInstances: [{ key: 'whiteDwarf', position: [0, 0, 0], scale: 1 }],
         // tags removed
-        cardImage: '',
+         cardImage: '/CardImage/whitedwarf.png',
         preview: { type: 'gradient', accent: '#f8fafc' },
         facts: [
           'Earth-sized but with Sun-like mass',

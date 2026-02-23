@@ -9,9 +9,9 @@
   background-image:
     linear-gradient(
       180deg,
-      rgba(4, 0, 12, 0.78) 0%,
-      rgba(4, 0, 12, 0.7) 60%,
-      rgba(4, 0, 12, 0.88) 100%
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.6) 60%,
+      rgba(0, 0, 0, 0.72) 100%
     ),
     url('/textures/stars.jpg');
   background-size: 100% 100%, cover;
@@ -109,10 +109,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 30% 18%, rgba(192, 132, 252, 0.08), transparent 55%),
-    radial-gradient(circle at 70% 60%, rgba(96, 165, 250, 0.06), transparent 60%),
-    radial-gradient(circle at 50% 95%, rgba(168, 85, 247, 0.06), transparent 55%);
+  background: none;
   pointer-events: none;
 }
 

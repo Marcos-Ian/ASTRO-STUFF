@@ -94,7 +94,7 @@ const AstroDetail = () => {
   }, [astroData]);
 
   const starTitle = useMemo(
-    () => buildStarTitle(systemForDescription),
+    () => (systemForDescription ? buildStarTitle(systemForDescription) : null),
     [systemForDescription]
   );
 
@@ -102,6 +102,40 @@ const AstroDetail = () => {
     () => buildStarFact(systemForDescription),
     [systemForDescription]
   );
+
+  const blackHoleInfo = useMemo(() => {
+    if (astroData?.id !== 'black-hole') return null;
+
+    return {
+      id: 'black-hole',
+      name: astroData.name ?? 'Black Hole',
+      type: 'Black Hole',
+      description:
+        'A compact object whose gravity is strong enough that light cannot escape beyond its event horizon.',
+      facts: Array.isArray(astroData.facts) ? astroData.facts : [],
+      color: '#93c5fd',
+    };
+  }, [astroData]);
+
+  const whiteDwarfInfo = useMemo(() => {
+    if (astroData?.id !== 'white-dwarf') return null;
+
+    return {
+      id: 'white-dwarf',
+      name: astroData.name ?? 'White Dwarf',
+      type: 'White Dwarf',
+      description:
+        'A dense, cooling stellar core left behind after a Sun-like star sheds its outer layers.',
+      facts: Array.isArray(astroData.facts) ? astroData.facts : [],
+      color: '#dbeafe',
+      radius: 24,
+      intensity: 42000,
+      rotationSpeed: 0.8,
+    };
+  }, [astroData]);
+
+  const descriptionTitle = starTitle || astroData?.name || null;
+  const descriptionFact = starFact || astroData?.facts?.[0] || null;
 
   const handlePlanetClick = (planet, system) => {
     setSelectedPlanet(planet ?? null);
@@ -114,6 +148,24 @@ const AstroDetail = () => {
   const handleStarClick = (star, system) => {
     setSelectedStar(star ?? null);
     setSelectedStarSystemName(system?.name ?? null);
+    setSelectedPlanet(null);
+    setSelectedSystemName(null);
+    setSelectedPlanetId(null);
+  };
+
+  const handleBlackHoleClick = () => {
+    if (!blackHoleInfo) return;
+    setSelectedStar(blackHoleInfo);
+    setSelectedStarSystemName('Stellar Object');
+    setSelectedPlanet(null);
+    setSelectedSystemName(null);
+    setSelectedPlanetId(null);
+  };
+
+  const handleWhiteDwarfClick = () => {
+    if (!whiteDwarfInfo) return;
+    setSelectedStar(whiteDwarfInfo);
+    setSelectedStarSystemName('Stellar Object');
     setSelectedPlanet(null);
     setSelectedSystemName(null);
     setSelectedPlanetId(null);
@@ -170,7 +222,7 @@ const AstroDetail = () => {
           antialias: true,
           outputColorSpace: THREE.SRGBColorSpace,
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.15,
+          toneMappingExposure: 0.95,
         }}
       >
         <color attach="background" args={['#000000']} />
@@ -185,6 +237,28 @@ const AstroDetail = () => {
           {astroData?.modelInstances?.map((instance, idx) => {
             const ModelComponent = modelRegistry[instance.key];
             if (!ModelComponent) return null;
+
+            if (instance.key === 'blackHole') {
+              return (
+                <ModelComponent
+                  key={idx}
+                  {...instance}
+                  speedMultiplier={rotationSpeed}
+                  onClick={handleBlackHoleClick}
+                />
+              );
+            }
+
+            if (instance.key === 'whiteDwarf') {
+              return (
+                <ModelComponent
+                  key={idx}
+                  {...instance}
+                  speedMultiplier={rotationSpeed}
+                  onClick={handleWhiteDwarfClick}
+                />
+              );
+            }
 
             const supportsPlanetSelection = [
               'cancri55System',
@@ -218,7 +292,7 @@ const AstroDetail = () => {
               );
             }
 
-            return <ModelComponent key={idx} {...instance} />;
+            return <ModelComponent key={idx} {...instance} speedMultiplier={rotationSpeed} />;
           })}
           
           <CameraController
@@ -244,12 +318,12 @@ const AstroDetail = () => {
                 </EffectComposer>
         </Suspense>
       </Canvas>
-      {systemForDescription && starFact ? (
+      {descriptionTitle && descriptionFact ? (
         <SolarDescription
-          title={starTitle}
-          body={starFact}
+          title={descriptionTitle}
+          body={descriptionFact}
           hint={null}
-          ariaLabel={`${starTitle} star fact`}
+          ariaLabel={`${descriptionTitle} fact`}
         />
       ) : null}
       {selectedPlanet && (
