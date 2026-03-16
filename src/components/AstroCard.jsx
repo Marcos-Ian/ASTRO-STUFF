@@ -1,17 +1,27 @@
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './astroGallery.css'
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value))
 
 const AstroCard = ({ astro, onClick }) => {
   const cardRef = useRef(null)
+  const [imageFailed, setImageFailed] = useState(false)
 
   const accent = useMemo(() => astro?.preview?.accent || '#c084fc', [astro])
   const previewImageSrc = useMemo(() => {
-    if (astro?.cardImage) return astro.cardImage
-    if (astro?.preview?.type === 'image') return astro?.preview?.src
+    const rawSrc = astro?.cardImage || (astro?.preview?.type === 'image' ? astro?.preview?.src : null)
+    if (typeof rawSrc === 'string') {
+      const normalizedSrc = rawSrc.trim()
+      return normalizedSrc || null
+    }
+    if (rawSrc) return rawSrc
     return null
   }, [astro])
+  const showPreviewImage = Boolean(previewImageSrc) && !imageFailed
+
+  useEffect(() => {
+    setImageFailed(false)
+  }, [previewImageSrc])
 
   const handleMove = (e) => {
     const el = cardRef.current
@@ -50,8 +60,14 @@ const AstroCard = ({ astro, onClick }) => {
       onClick={() => onClick?.(astro)}
     >
       <div className="astro-card__preview" aria-hidden="true">
-        {previewImageSrc ? (
-          <img className="astro-card__img" src={previewImageSrc} alt="" loading="lazy" />
+        {showPreviewImage ? (
+          <img
+            className="astro-card__img"
+            src={previewImageSrc}
+            alt=""
+            loading="lazy"
+            onError={() => setImageFailed(true)}
+          />
         ) : (
           <div className="astro-card__orb" />
         )}
